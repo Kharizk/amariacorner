@@ -7,6 +7,11 @@ export interface Product {
   category: string;
   brand: string;
   unit: string; // 'حبة' | 'كرتون' | 'كجم' etc.
+  
+  // Secondary Unit Options (e.g., Carton)
+  secondaryUnit?: string; 
+  secondaryPrice?: number;
+
   discountPercent?: number; // Optional discount percentage
   isNew?: boolean;
   offerQuantity?: number; // For bundle offers (e.g. 2 pieces)
@@ -15,6 +20,9 @@ export interface Product {
 
 export interface CartItem extends Product {
   quantity: number;
+  selectedUnit: string; // The unit chosen by the user
+  finalPrice: number;   // The price of that unit at time of purchase
+  originalProductId: string; // Reference to the parent product
 }
 
 export interface Order {
@@ -30,10 +38,12 @@ export enum PageView {
   MENU = 'MENU',
   ADMIN = 'ADMIN',
   CART = 'CART',
+  FAVORITES = 'FAVORITES',
 }
 
 export const CATEGORIES = [
   'الكل',
+  'بكجات التوفير',
   'لحوم',
   'دواجن مجمدة',
   'دواجن مبردة',
@@ -48,6 +58,7 @@ export const CATEGORIES = [
 
 export const BRANDS = [
   'الكل',
+  'ركن العمارية',
   'أمريكانا',
   'سيارا',
   'ساديا',
@@ -72,5 +83,6 @@ export const UNITS = [
   'شدة',
   'جالون',
   'علبة',
-  'طبق'
+  'طبق',
+  'بكج'
 ];

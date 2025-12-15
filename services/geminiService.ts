@@ -92,3 +92,43 @@ export const generateProductDescription = async (name: string, brand: string): P
     return "";
   }
 };
+
+export const analyzeFridgeImage = async (base64Image: string): Promise<string> => {
+  const ai = getClient();
+  if (!ai) return "خدمة تحليل الصور غير متوفرة حالياً.";
+
+  try {
+    // Extract mimeType and base64 data
+    const matches = base64Image.match(/^data:(.+);base64,(.+)$/);
+    if (!matches || matches.length !== 3) {
+      throw new Error("Invalid image format");
+    }
+    const mimeType = matches[1];
+    const data = matches[2];
+
+    const prompt = `
+      أنت شيف ذكي في تطبيق "ركن العمارية".
+      لقد قام العميل بتصوير محتويات ثلاجته أو المكونات التي لديه.
+      1. تعرف على المكونات الموجودة في الصورة.
+      2. اقترح طبخة ذكية يمكن تحضيرها بهذه المكونات.
+      3. والأهم: اقترح منتجات مجمدة (لحوم، دجاج، خضروات، بطاطس) من "ركن العمارية" تكمل هذه الطبخة وتجعلها ألذ.
+      
+      تحدث بلهجة سعودية ودية ومرحة.
+    `;
+
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: {
+        parts: [
+          { text: prompt },
+          { inlineData: { mimeType, data } }
+        ]
+      }
+    });
+
+    return response.text || "لم أتمكن من تحليل الصورة بوضوح.";
+  } catch (error) {
+    console.error("Error analyzing image:", error);
+    return "حدث خطأ أثناء تحليل الصورة، حاول مرة أخرى بصورة أوضح.";
+  }
+};

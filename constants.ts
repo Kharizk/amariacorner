@@ -1,6 +1,38 @@
 import { Product } from './types';
 
+// Helper to generate consistent search-based image URLs
+// This replaces AI generation with direct image search results
+const getProductImage = (query: string) => {
+  return `https://tse2.mm.bing.net/th?q=${encodeURIComponent(query)}&w=500&h=500&c=7&rs=1&p=0`;
+};
+
 export const INITIAL_PRODUCTS: Product[] = [
+  // Bundles (New Category)
+  {
+    id: 'b1',
+    name: 'بوكس الشواء الملكي',
+    description: 'كل ما تحتاجه للشواء: 24 برجر أمريكانا + كيس بطاطس + خبز برجر + صوص شيدر.',
+    price: 99,
+    category: 'بكجات التوفير',
+    brand: 'ركن العمارية',
+    unit: 'بكج',
+    image: getProductImage('bbq burger kit food box'),
+    offerQuantity: 1,
+    offerPrice: 85,
+    isNew: true
+  },
+  {
+    id: 'b2',
+    name: 'بكج سحور رمضان',
+    description: 'كرتون دجاج سيارا + كيس سمبوسة كبير + عجينة رقائق + لبنة المراعي.',
+    price: 180,
+    category: 'بكجات التوفير',
+    brand: 'ركن العمارية',
+    unit: 'بكج',
+    image: getProductImage('ramadan food box frozen'),
+    discountPercent: 15
+  },
+
   // Americana
   {
     id: '1',
@@ -10,7 +42,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'لحوم',
     brand: 'أمريكانا',
     unit: 'كيس',
-    image: 'https://picsum.photos/400/300?random=1',
+    secondaryUnit: 'كرتون',
+    secondaryPrice: 250, // Example carton price
+    image: getProductImage('Americana beef burger package'),
     discountPercent: 10
   },
   {
@@ -21,7 +55,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'دواجن مجمدة',
     brand: 'أمريكانا',
     unit: 'كيس',
-    image: 'https://picsum.photos/400/300?random=2',
+    secondaryUnit: 'كرتون',
+    secondaryPrice: 210,
+    image: getProductImage('Americana chicken nuggets bag'),
   },
   {
     id: '3',
@@ -31,7 +67,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'لحوم',
     brand: 'أمريكانا',
     unit: 'حبة',
-    image: 'https://picsum.photos/400/300?random=3',
+    secondaryUnit: 'كرتون',
+    secondaryPrice: 220, // 20 pieces roughly
+    image: getProductImage('Americana minced mutton meat'),
   },
 
   // Sadia
@@ -43,7 +81,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'دواجن مجمدة',
     brand: 'ساديا',
     unit: 'حبة',
-    image: 'https://picsum.photos/400/300?random=4',
+    secondaryUnit: 'كرتون',
+    secondaryPrice: 165, // 10 pieces
+    image: getProductImage('Sadia frozen whole chicken'),
     isNew: true
   },
   {
@@ -54,7 +94,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'دواجن مجمدة',
     brand: 'ساديا',
     unit: 'كيس',
-    image: 'https://picsum.photos/400/300?random=5',
+    secondaryUnit: 'كرتون',
+    secondaryPrice: 380, // 6 bags
+    image: getProductImage('Sadia chicken breast fillets bag'),
   },
 
   // Seara
@@ -66,7 +108,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'دواجن مجمدة',
     brand: 'سيارا',
     unit: 'كيس',
-    image: 'https://picsum.photos/400/300?random=6',
+    secondaryUnit: 'كرتون',
+    secondaryPrice: 260,
+    image: getProductImage('Seara spicy chicken strips'),
   },
   {
     id: '7',
@@ -76,7 +120,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'دواجن مجمدة',
     brand: 'سيارا',
     unit: 'كرتون',
-    image: 'https://picsum.photos/400/300?random=7',
+    image: getProductImage('Seara frozen chicken box'),
     discountPercent: 5
   },
 
@@ -89,7 +133,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'بطاطس',
     brand: 'ماكين',
     unit: 'كيس',
-    image: 'https://picsum.photos/400/300?random=8',
+    secondaryUnit: 'كرتون',
+    secondaryPrice: 130, // 4 bags
+    image: getProductImage('McCain french fries bag'),
   },
   {
     id: '9',
@@ -99,7 +145,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'بطاطس',
     brand: 'لامب وستون',
     unit: 'كيس',
-    image: 'https://picsum.photos/400/300?random=9',
+    secondaryUnit: 'كرتون',
+    secondaryPrice: 195, // 5 bags
+    image: getProductImage('Lamb Weston twister fries bag'),
     isNew: true
   },
   {
@@ -110,7 +158,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'بطاطس',
     brand: 'الذهبية',
     unit: 'كيس',
-    image: 'https://picsum.photos/400/300?random=10',
+    secondaryUnit: 'كرتون',
+    secondaryPrice: 95, // 4 bags
+    image: getProductImage('Golden french fries bag'),
   },
 
   // Chilled Poultry
@@ -122,7 +172,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'دواجن مبردة',
     brand: 'رضوى',
     unit: 'حبة',
-    image: 'https://picsum.photos/400/300?random=11',
+    secondaryUnit: 'كرتون',
+    secondaryPrice: 190,
+    image: getProductImage('Radwa fresh chicken'),
   },
   {
     id: '12',
@@ -132,7 +184,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'دواجن مبردة',
     brand: 'اليوم',
     unit: 'طبق',
-    image: 'https://picsum.photos/400/300?random=12',
+    image: getProductImage('Alyoum chicken breast fillet'),
   },
 
   // Qualiko
@@ -144,7 +196,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'دواجن مجمدة',
     brand: 'كواليكو',
     unit: 'كيس',
-    image: 'https://picsum.photos/400/300?random=13',
+    image: getProductImage('Qualiko chicken escalope'),
   },
 
   // Sauces & Oils & Cheese
@@ -156,7 +208,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'صوصات',
     brand: 'بوك',
     unit: 'حبة',
-    image: 'https://picsum.photos/400/300?random=14',
+    image: getProductImage('Puck cheddar cheese jar'),
   },
   {
     id: '15',
@@ -166,7 +218,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'زيوت وسمن',
     brand: 'مازولا',
     unit: 'جالون',
-    image: 'https://picsum.photos/400/300?random=15',
+    image: getProductImage('Mazola corn oil 9L'),
   },
   {
     id: '16',
@@ -176,7 +228,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'زيوت وسمن',
     brand: 'أخرى',
     unit: 'علبة',
-    image: 'https://picsum.photos/400/300?random=16',
+    image: getProductImage('Vegetable ghee spoon and fork'),
   },
   {
     id: '17',
@@ -186,6 +238,6 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'أجبان وألبان',
     brand: 'المراعي',
     unit: 'كيس',
-    image: 'https://picsum.photos/400/300?random=17',
+    image: getProductImage('Almarai mozzarella cheese shredded'),
   }
 ];

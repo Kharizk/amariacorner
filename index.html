@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
+        darkMode: 'class',
         theme: {
           extend: {
             fontFamily: {
@@ -24,6 +25,9 @@
                 dark: '#1e293b',
                 gray: '#f8fafc',
               }
+            },
+            animation: {
+              'bounce-slow': 'bounce 3s infinite',
             }
           }
         }
@@ -54,6 +58,13 @@
           -ms-overflow-style: none;
           scrollbar-width: none;
       }
+      /* Dark mode scrollbar adjustments could go here if needed */
+      .dark body {
+        background-color: #0f172a;
+      }
+      .dark ::-webkit-scrollbar-track {
+        background: #1e293b;
+      }
     </style>
   <script type="importmap">
 {
@@ -71,7 +82,7 @@
 }
 </script>
 </head>
-  <body class="font-sans antialiased text-gray-800 bg-slate-50">
+  <body class="font-sans antialiased text-gray-800 bg-slate-50 dark:bg-slate-900 transition-colors duration-300 selection:bg-brand-red selection:text-white">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>
